@@ -1,0 +1,21 @@
+#Pull base image
+FROM python:3.7
+
+#SET ENVIRONMENT VARIABLES
+
+ENV PYTHONBUFFERED 1
+ENV PYTHONWRITEBYTECODE 1
+
+#SET WORKING DIRECTORY
+WORKDIR /app
+
+
+#INSTALL DEPENDENCIES
+RUN pip install pipenv
+
+COPY Pipfile Pipfile.lock /app/
+
+RUN pipenv install --system
+
+#COPY OUR DJANGO PROJECT
+COPY . /app/
